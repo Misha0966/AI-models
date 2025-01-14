@@ -35,6 +35,8 @@ x, y = generate_data_3d(samples, angle)  # Генерируем данные и 
 data = [(x[:, i:min(i + batch_size - 1, end)], y[:, i:min(i + batch_size - 1, end)]) 
 for i in 1:batch_size:samples]  # Разделяем данные на батчи
 
+# Параметры:
+  
 model = Chain(  # Определяем архитектуру модели
 Dense(3, 64, relu),  # Входной слой: из 3D в 64 признака
 fractal_block(64, 128),  # Фрактальный блок: повышаем сложность
