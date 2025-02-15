@@ -51,8 +51,11 @@
 Установите необходимые пекаты в Julia:
 
 using Pkg
+
 Pkg.add("Serialization")
+
 Pkg.add("Dates")
+
 Pkg.add("Random")
 
 Запустите скрипт симуляции.
