@@ -182,25 +182,25 @@ function evaluate_action_quality(model::UnifiedSelfAwareModel, action::String)
     # Если действие относится к категории "отдых", то базовая оценка увеличивается
     if action in model.goals["отдых"]
         base_score += 2
-        # Если действие "сходить в туалет по большому", повышаем оценку на 3
+        # Если действие "сходить в туалет по большому", повышаем оценку на 2
         if action == "сходить в туалет по большому"
             base_score += 2
         # Если действие "сходить в туалет по маленькому", повышаем оценку на 2
         elseif action == "сходить в туалет по маленькому"
             base_score += 2
-        # Для других действий, таких как просмотр фильмов или игра в видеоигры, повышаем оценку на 1
+        # Для других действий, таких как просмотр фильмов или игра в видеоигры, повышаем оценку на 2
         elseif action == "просмотр фильмов"
             base_score += 2
         elseif action == "игра в видеоигры"
             base_score += 2
         elseif action == "медитация"
-            base_score += 2  # Медитация даёт большое улучшение
+            base_score += 2 
         elseif action == "чтение книг"
-            base_score += 2  # Чтение книг также положительно влияет
+            base_score += 2 
         elseif action == "прослушивание подкастов"
             base_score += 2
         elseif action == "прогулка на природе"
-            base_score += 2  # Прогулка на природе даёт хороший бонус
+            base_score += 2 
         end
     # Если действие относится к категории "работа"
     elseif action in model.goals["работа"]
@@ -230,7 +230,7 @@ function evaluate_action_quality(model::UnifiedSelfAwareModel, action::String)
     # Если действие относится к категории "здоровье"
     elseif action in model.goals["здоровье"]
         if action == "занятия спортом"
-            base_score += 1  # Спортивные занятия дают наибольший бонус
+            base_score += 1 
         elseif action == "медитация"
             base_score += 1
         elseif action == "прогулка на природе"
@@ -240,7 +240,7 @@ function evaluate_action_quality(model::UnifiedSelfAwareModel, action::String)
     # Если действие относится к категории "вредные привычки"
     elseif action in model.goals["вредные привычки"]
         if action == "приём наркотиков"
-            base_score -= 1  # Наркотики сильно ухудшают качество действия
+            base_score -= 1 
         elseif action == "употребление алкоголя"
             base_score -= 1
         elseif action == "курение"
@@ -419,12 +419,12 @@ function update_motivation_hierarchy(model::UnifiedSelfAwareModel)
         model.motivation_hierarchy["отдых"] += 0.1
         model.motivation_hierarchy["работа"] += 0.1
         println("Низкий уровень счастья. Приоритет отдыха увеличен.")
-    # Если уровень гнева модели выше 0.5, приоритет этических действий увеличивается
+    # Если уровень гнева модели выше 50, приоритет этических действий увеличивается
     elseif model.emotions["гнев"] > 50.0
         model.motivation_hierarchy["этика"] += 0.1
         println("Высокий уровень гнева. Приоритет этических действий увеличен.")
     end
-    # Ограничиваем мотивацию в диапазоне [0, 1]
+    # Ограничиваем мотивацию в диапазоне [0, 100]
     for (goal, value) in model.motivation_hierarchy
         model.motivation_hierarchy[goal] = clamp(value, 0.0, 100.0)
     end
