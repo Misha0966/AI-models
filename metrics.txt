@@ -1,0 +1,5 @@
+Model Evaluation Metrics:
+Accuracy: 0.97
+Precision: 0.95
+Recall: 1.0
+F1-Score: 0.97
